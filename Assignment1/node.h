@@ -2,7 +2,7 @@
 #define NODE_H 
 
 class Node {
-    public:
+public:
     int data;
     Node* next;
 

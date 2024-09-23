@@ -1,14 +1,6 @@
-#include <iostream>
-using namespace std;
-#include <vector>
+#include "Node.h"
 
-class Node {
-public:
-    int data;
-    Node* next;
-    
-    Node(int value) {
-        this->data = value;
-        this->next = nullptr;
-    }
-};
+Node:: Node(int value) {
+    this->data = value;
+    this->next = nullptr;
+}

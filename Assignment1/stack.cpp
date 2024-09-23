@@ -3,6 +3,7 @@ using namespace std;
 #include "node.h"
 
 class Stack {
+private:
     Node* top;
 
 public:

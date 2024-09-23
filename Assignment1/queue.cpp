@@ -3,6 +3,7 @@ using namespace std;
 #include "node.h"
 
 class Queue {
+private:
     Node* head;
     Node* tail;
 

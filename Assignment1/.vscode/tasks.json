@@ -1,0 +1,32 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "g++ build active file",
+            "command": "/usr/bin/g++",
+            "args": [
+                "-g",
+                "-std=c++11",
+                "${workspaceFolder}/main.cpp",
+                "${workspaceFolder}/palindromes.cpp",
+                "${workspaceFolder}/node.cpp",
+                "${workspaceFolder}/stack.cpp",
+                "${workspaceFolder}/queue.cpp",
+                "${workspaceFolder}/sorts.cpp",
+                "-o",
+                "${workspaceFolder}/assignment1"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

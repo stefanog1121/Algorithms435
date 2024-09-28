@@ -23,6 +23,9 @@
         "*.bms": "hlasm",
         "*.rex": "rexx",
         "*.rexx": "rexx",
-        "vector": "cpp"
-    }
+        "iostream": "cpp",
+        "vector": "cpp",
+        "new": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "enabled"
 }

@@ -1,43 +1,26 @@
 #include <iostream>
-using namespace std;
 #include <vector>
 #include <fstream>
 #include <string>
 #include "stack.h"
 #include "queue.h"
 
-void palindromes(vector<string> items);
-
-int main() {
-    ifstream file("magicitems.txt");
-    string line;
-    vector<string> list;
-
-    if (file.is_open()) {
-        while (getline(file, line)) {
-            list.push_back(line);
-        }
-        file.close();
-    } else {
-        cout << "Unable to open file" << endl;
-    }
-
-   palindromes(list);
-}
-
-void palindromes(vector<string> items) {
+void palindromes(std::vector<std::string>& items) {
     int size = items.size(); 
     int i = 0;
 
+    std::cout << "\nPalindromes:" << std::endl;
     while (i < size) {
         Stack s; 
         Queue q;
-        string item = items[i];
+        std::string item = items[i];
 
         for(char c : item) {
-            int charValue = static_cast<int>(c);
-            s.push(charValue);
-            q.enqueue(charValue); 
+            if(isalnum(c)) {
+                char lowC = tolower(c);
+                s.push(lowC);
+                q.enqueue(lowC); 
+            }
         }
 
         bool palindrome = true;
@@ -52,7 +35,7 @@ void palindromes(vector<string> items) {
             }
         }
 
-        if (palindrome) {cout << items[i] << endl;};
+        if (palindrome) {std::cout << items[i] << std::endl;};
         i++;
     }
 }

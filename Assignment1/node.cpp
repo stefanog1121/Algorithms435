@@ -1,11 +1,6 @@
-#include "Node.h"
+#include "node.h"
 
-class Node {
-    public:
-        int data;
-        Node* next;
-    Node(int value) {
-        this->data = value;
-        this->next = nullptr;
-    }
-};
+Node::Node(int value) {
+    this->data = value;
+    this->next = nullptr;
+}

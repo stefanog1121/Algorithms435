@@ -13,6 +13,7 @@ public:
     bool isEmpty();
     void enqueue(int newData);
     void dequeue();
+    int peek();
 };
 
 #endif

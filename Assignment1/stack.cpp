@@ -1,45 +1,39 @@
 #include <iostream>
-using namespace std;
-#include "node.h"
+#include "stack.h"
 
-class Stack {
-private:
-    Node* top;
 
-public:
-    Stack() { this->top = nullptr; }
+Stack::Stack() { this->top = nullptr; }
 
-    bool isEmpty() {
-        return top == nullptr;
+bool Stack::isEmpty() {
+    return top == nullptr;
+}
+
+// slice top element from the stack
+void Stack::pop() {
+    if (isEmpty()) {
+        std::cout << "Empty Stack";
     }
-
-    // slice top element from the stack
-    void pop() {
-        if (this->isEmpty()) {
-            cout << "Empty Stack";
-        }
-        else {
-            Node* temp = top;
-            Node* top = top->next;
-            delete temp;
-        }
+    else {
+        Node* temp = top;
+        top = top->next;
+        delete temp;
     }
+}
 
-    // add new node to the stack
-    void push(int newData) {
-        Node* newNode = new Node(newData);
-        newNode->next = top;
-        top = newNode;
-    }
+// add new node to the stack
+void Stack::push(int newData) {
+    Node* newNode = new Node(newData);
+    newNode->next = top;
+    top = newNode;
+}
 
-    // view node on top of stack
-    int peek() {
-        if (!this->isEmpty()) {
-            return top->data;
-        }
-        else {
-            cout << "Empty Stack";
-            return INT_MIN;
-        }
+// view node on top of stack
+int Stack::peek() {
+    if (!isEmpty()) {
+        return top->data;
     }
-};
+    else {
+        std::cout << "Empty Stack";
+        return INT_MIN;
+    }
+}

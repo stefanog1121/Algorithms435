@@ -1,44 +1,47 @@
 #include <iostream>
-using namespace std;
-#include "node.h"
+#include "queue.h"
 
-class Queue {
-private:
-    Node* head;
-    Node* tail;
 
-public:
-    Queue() { head = tail = nullptr;}
+Queue::Queue() { head = tail = nullptr;}
 
-    bool isEmpty() {
-        return head == nullptr;
+bool Queue::isEmpty() {
+    return head == nullptr;
+}
+
+void Queue::enqueue(int newData) {
+    Node* newNode = new Node(newData);
+
+    if (isEmpty()) {
+        head = tail = newNode;
     }
 
-    void enqueue(int newData) {
-        Node* newNode = new Node(newData);
+    else {
+        tail->next = newNode;
+        tail = newNode;
+    }
+}
 
-        if (this->isEmpty()) {
-            head = tail = newNode;
-        }
+void Queue::dequeue() {
+    if (isEmpty()) {
+        std::cout << "Queue Empty";
+        return;
+    }
+    Node* temp = head;
+    head = head->next;
 
-        else {
-            tail->next = newNode;
-            tail = newNode;
-        }
+    if (head == nullptr) {
+        tail = nullptr;
     }
 
-    void dequeue() {
-        if (this->isEmpty()) {
-            cout << "Queue Empty";
-            return;
-        }
-        Node* temp = head;
-        head = head->next;
+    delete temp;
+}
 
-        if (head == nullptr) {
-            tail = nullptr;
-        }
-
-        delete temp;
+int Queue::peek() {
+    if (!this->isEmpty()) {
+        return head->data;
     }
-};
+    else {
+        std::cout << "Empty Queue";
+        return INT_MIN;
+    }
+}

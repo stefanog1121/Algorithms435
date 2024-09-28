@@ -4,13 +4,14 @@
 #include "node.h"
 
 class Stack {
-    private:
-        Node* top;
-    public:
-        bool isEmpty();
-        void pop();
-        void push();
-        int peek();
+private:
+    Node* top;
+public:
+    Stack();
+    bool isEmpty();
+    void pop();
+    void push(int newData);
+    int peek();
 };
 
 #endif

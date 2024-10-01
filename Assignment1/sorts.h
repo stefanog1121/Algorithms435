@@ -1,33 +1,14 @@
+#ifndef SORTS_H
+#define SORTS_H
 
-void selectionSort() 
-{
+#include <vector>
 
-}
+void selectionSort(std::vector<int>& A);
 
-void insetionSort(int a[], int n) 
-{
-    // Starting at the second element, traverse array
-    for (int i = 1; i < n; ++i) {
-        int key = a[i];
-        int j = i - 1;
+void insertionSort(std::vector<int>& A);
 
-        /* Starting with 1 - the current index, compare key to previous element and swap if required,
-         working backwards until all previous elements have been compared  */
-        while (j >= 0 && a[j] > key) {
-            a[j + 1] = a[j];
-            j = j - 1;
-        }
-        a[j + 1] = key;
-    }
+void mergeSort(std::vector<int>& A);
 
-}
+void quickSort(std::vector<int>& A);
 
-void mergeSort() 
-{
-
-}
-
-void quickSort() 
-{
-
-}
+#endif

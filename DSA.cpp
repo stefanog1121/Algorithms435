@@ -3,7 +3,7 @@ using namespace std;
 #include <vector>
 
 int main() {
-    int a[] = {3, 7, 8, 6, 4, 10, 28, 2, 18, 9};
+    vector<int> a = {3, 7, 8, 6, 4, 10, 28, 2, 18, 9};
     int n = sizeof(a) / sizeof(a[0]);
     DSA dsa;
 
@@ -15,17 +15,21 @@ int main() {
 
 class DSA {
 public:
-    void insertionSort(int arr[], int n) 
+    void selectionSort() {
+
+    }
+
+    void insertionSort(vector<int>& A, int n) 
     {
         for (int i = 1; i < n; ++i) {
-            int key = arr[i];
+            int key = A[i];
             int j = i - 1;
 
-            while (j >= 0 && arr[j] > key) {
-                arr[j + 1] = arr[j];
+            while (j >= 0 && A[j] > key) {
+                A[j + 1] = A[j];
                 j = j - 1;
             }
-            arr[j + 1] = key;
+            A[j + 1] = key;
         }
     }
 
@@ -84,9 +88,13 @@ public:
         }
     }
 
-    void printArray(int a[], int n) {
+    void quickSort() {
+
+    }
+    
+    void printArray(vector<int> A, int n) {
         for (int i = 0; i < n; ++i)
-            cout << a[i] << " ";
+            cout << A[i] << " ";
         cout << endl;
     }
 

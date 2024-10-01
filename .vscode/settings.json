@@ -23,6 +23,7 @@
         "*.bms": "hlasm",
         "*.rex": "rexx",
         "*.rexx": "rexx",
-        "vector": "cpp"
+        "vector": "cpp",
+        "__node_handle": "cpp"
     }
 }

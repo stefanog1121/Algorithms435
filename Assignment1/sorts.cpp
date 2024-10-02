@@ -17,7 +17,7 @@ void selectionSort(std:: vector<int>& A)
         }
 
         // perform swap if necesary
-        if (low = i) {
+        if (low != i) {
             std::swap(A[i], A[low]);
         }
     }
@@ -41,7 +41,7 @@ void insertionSort(std::vector<int>& A)
     }
 }
 
-void mergeSort(std::vector<int>& A, int left, int right) {} 
+void mergeSort(std::vector<int>& A, int left, int right) 
 {
     if (left < right) {
         int mid = left + (right - left) / 2;
@@ -58,26 +58,74 @@ void merge(std::vector<int>& A, int left, int right, int mid) {
     int n1 = mid - left + 1;
     int n2 = right - mid;
 
-    // create & populate temp arrays 
-    vector<int> L(n1);
+    // Create & populate temp arrays 
+    std::vector<int> L(n1);
     for (int i = 0; i < n1; i++){
-        L[i] = arr[left + i]
+        L[i] = A[left + i]
     };
 
-    vector<int> R(n2);
+    std::vector<int> R(n2);
     for (int j = 0; j < n2; j++) {
-        R[j] = arr[mid + 1 + j]
+        R[j] = A[mid + 1 + j]
     };
 
     int i, j = 0;
     int k = left;
 
-    for ()
+    while (i < n1 && j < n2) {
+        // Merge each half back together by comparing elements from each subarry and placing the smaller of the two 
 
-    
+
+        if (L[i] <= R[j]) {
+            A[k] = L[i];
+            i++;
+        }
+        else {
+            A[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+    while (i < n1) {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+
+    while (j < n2) {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
 }
 
-void quickSort() 
+void quickSort(std::vector<int>& A, int low, int high) 
 {
+    if (low < high) {
+        //  Partition array around a chosen pivot into low and high subarray halves,
+        //  returning the partition to the middle of each
+        part = partition(A, low, high)
 
+        // Recursively sort each smaller subarray of either half by further partitioning
+        // and calls to quickSort
+        quickSort(A, low, part-1);
+        quickSort(A, part+1, high);
+
+    }
+}
+int partition(std::vector<int>& A, int low, int high) 
+{
+    // Using high as pivot, sort array between elements below than the pivot and those above
+    int pivot = A[high];
+    int i = low - 1;
+    for (j = low, j < high, j++) {
+        if (A[j] <= pivot) {
+            i++;
+            std::swap(A[i], A[j])
+        }
+    }
+
+    // Return pivot to middle position between each half
+    std::swap(A[i+1], A[high])
+    return (i+1);
 }

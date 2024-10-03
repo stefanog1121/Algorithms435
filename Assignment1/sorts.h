@@ -21,4 +21,7 @@ void countQuickSort(std::vector<std::string>& A);
 
 void shuffle(std::vector<std::string>& A);
 
+std::string makeLower(std::string s);
+
+
 #endif

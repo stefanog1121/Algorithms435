@@ -1,6 +1,12 @@
 #include <iostream>
 #include <vector>
 
+std::string makeLower(std::string s) {
+    std::transform(s.begin(), s.end(), s.begin(),
+        [](unsigned char c){ return std::tolower(c); });
+    return s;
+};
+
 void selectionSort(std:: vector<std::string>& A) 
 {
     int comparisons = 0;
@@ -13,7 +19,7 @@ void selectionSort(std:: vector<std::string>& A)
         for (int j = i + 1; j < n; ++j) {
             comparisons++;
             // loop through unsorted part of array, updating new low index is one is found
-            if (A[j] < A[low]) {
+            if (makeLower(A[j]) < makeLower(A[low])) {
                 low = j;
             }
         }
@@ -23,7 +29,7 @@ void selectionSort(std:: vector<std::string>& A)
             std::swap(A[i], A[low]);
         }
     }
-    std::cout << "Selection Sort Comparisons: " << comparisons << std:: endl;
+    std::cout << "Selection Sort Comparisons: " << comparisons << "\n" << std::endl;
 };
 
 void insertionSort(std::vector<std::string>& A) 
@@ -39,13 +45,13 @@ void insertionSort(std::vector<std::string>& A)
          working backwards until all previous elements have been compared  */
         while (j >= 0) {
             comparisons++;
-            if (A[j] > key) break;
+            if (makeLower(A[j]) < makeLower(key)) break;
             A[j + 1] = A[j];
             j = j - 1;
         }
         A[j + 1] = key;
     }
-    std::cout << "Insertion Sort Comparisons: " << comparisons << std:: endl;
+    std::cout << "Insertion Sort Comparisons: " << comparisons << "\n" <<std::endl;
 };
 
 // Merge the low-mid and mid-high subarrays of A 
@@ -64,14 +70,16 @@ void merge(std::vector<std::string>& A, int left, int right, int mid, int& compa
         R[j] = A[mid + 1 + j];
     };
 
-    int i, j = 0;
+
+    int i = 0;
+    int j = 0;
     int k = left;
 
     while (i < n1 && j < n2) {
         comparisons++;
 
         // Merge each half back together by comparing elements from each subarry and placing the smaller of the two 
-        if (L[i] <= R[j]) {
+        if (makeLower(L[i]) <= makeLower(R[j])) {
             A[k] = L[i];
             i++;
         }
@@ -102,14 +110,14 @@ void mergeSort(std::vector<std::string>& A, int left, int right, int& comparison
         // Recursively divide an array into sorted sub arrays of size 1, and then merge back the sorted subarrys
         mergeSort(A, left, mid, comparisons);
         mergeSort(A, mid + 1, right, comparisons);
-        merge(A, left, mid, right, comparisons);
+        merge(A, left, right, mid, comparisons);
     }
 };
 
 void countMergeSort(std::vector<std::string>& A) {
     int comparisons = 0;
     mergeSort(A, 0, A.size() - 1, comparisons);
-    std::cout << "Merge Sort Comparisons: " << comparisons << std::endl;
+    std::cout << "Merge Sort Comparisons: " << comparisons << "\n" << std::endl;
 };
 
 int partition(std::vector<std::string>& A, int low, int high, int& comparisons) 
@@ -119,7 +127,7 @@ int partition(std::vector<std::string>& A, int low, int high, int& comparisons)
     int i = low - 1;
     for (int j = low; j < high; j++) {
         comparisons++;
-        if (A[j] <= pivot) {
+        if (makeLower(A[j]) <= makeLower(pivot)) {
             i++;
             std::swap(A[i], A[j]);
         }
@@ -148,7 +156,7 @@ void quickSort(std::vector<std::string>& A, int low, int high, int& comparisons)
 void countQuickSort(std::vector<std::string>& A) {
     int comparisons = 0;
     quickSort(A, 0, A.size() - 1, comparisons);
-    std::cout << "Quick Sort Comparisons: " << comparisons << std::endl;
+    std::cout << "Quick Sort Comparisons: " << comparisons << "\n" << std::endl;
 };
 
 void shuffle(std::vector<std::string>& A) 
@@ -162,3 +170,4 @@ void shuffle(std::vector<std::string>& A)
     }
     std::cout << "Shuffled Array" << std::endl;
 };
+

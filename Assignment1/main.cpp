@@ -28,7 +28,7 @@ int main() {
     vector<string> list = readFile("/Users/stfarro/Library/Mobile Documents/com~apple~CloudDocs/Marist 24-25/Algorithms/Algorithms435/assignment1/magicitems.txt");
 
     // Validate palindromes
-    palindromes(list);
+    //palindromes(list);
 
     // Randomize array using Knuth shuffle, then sort via ...
     shuffle(list);
@@ -43,8 +43,8 @@ int main() {
     shuffle(list);
     countQuickSort(list);
 
-    
     // Prints Sorted Array for validation
+    
     for (auto i : list) {
         cout << i << std::endl;
     }

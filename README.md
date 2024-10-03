@@ -2,7 +2,7 @@
 ### Projects & work related to CMPT435
 
 ## Compile Command
-g++ -std=c++11 main.cpp palindromes.cpp stack.cpp queue.cpp node.cpp -o man
+g++ -std=c++11 main.cpp palindromes.cpp stack.cpp queue.cpp node.cpp sorts.cpp -o main
 
 ## To Run:
-Run 'main' compiled executible in each assignment folder
+Test files for each portion are included

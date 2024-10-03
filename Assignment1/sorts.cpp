@@ -1,8 +1,9 @@
 #include <iostream>
 #include <vector>
 
-void selectionSort(std:: vector<int>& A) 
+void selectionSort(std:: vector<std::string>& A) 
 {
+    int comparisons = 0;
     int n = A.size();
 
     for (int i = 0; i < n - 1; ++i) {
@@ -10,6 +11,7 @@ void selectionSort(std:: vector<int>& A)
         int low = i;
 
         for (int j = i + 1; j < n; ++j) {
+            comparisons++;
             // loop through unsorted part of array, updating new low index is one is found
             if (A[j] < A[low]) {
                 low = j;
@@ -21,61 +23,54 @@ void selectionSort(std:: vector<int>& A)
             std::swap(A[i], A[low]);
         }
     }
-}
+    std::cout << "Selection Sort Comparisons: " << comparisons << std:: endl;
+};
 
-void insertionSort(std::vector<int>& A) 
+void insertionSort(std::vector<std::string>& A) 
 {
+    int comparisons = 0;
     int n = A.size();
     // Starting at the second element, traverse array
     for (int i = 1; i < n; ++i) {
-        int key = A[i];
+        std::string key = A[i];
         int j = i - 1;
 
         /* Starting with 1 - the current index, compare key to previous element and swap if required,
          working backwards until all previous elements have been compared  */
-        while (j >= 0 && A[j] > key) {
+        while (j >= 0) {
+            comparisons++;
+            if (A[j] > key) break;
             A[j + 1] = A[j];
             j = j - 1;
         }
         A[j + 1] = key;
     }
-}
-
-void mergeSort(std::vector<int>& A, int left, int right) 
-{
-    if (left < right) {
-        int mid = left + (right - left) / 2;
-
-        // Recursively divide an array into sorted sub arrays of size 1, and then merge back the sorted subarrys
-        mergeSort(A, left, mid);
-        mergeSort(A, mid + 1, right);
-        merge(A, left, mid, right);
-    }
-}
+    std::cout << "Insertion Sort Comparisons: " << comparisons << std:: endl;
+};
 
 // Merge the low-mid and mid-high subarrays of A 
-void merge(std::vector<int>& A, int left, int right, int mid) {
+void merge(std::vector<std::string>& A, int left, int right, int mid, int& comparisons) {
     int n1 = mid - left + 1;
     int n2 = right - mid;
 
     // Create & populate temp arrays 
-    std::vector<int> L(n1);
+    std::vector<std::string> L(n1);
     for (int i = 0; i < n1; i++){
-        L[i] = A[left + i]
+        L[i] = A[left + i];
     };
 
-    std::vector<int> R(n2);
+    std::vector<std::string> R(n2);
     for (int j = 0; j < n2; j++) {
-        R[j] = A[mid + 1 + j]
+        R[j] = A[mid + 1 + j];
     };
 
     int i, j = 0;
     int k = left;
 
     while (i < n1 && j < n2) {
+        comparisons++;
+
         // Merge each half back together by comparing elements from each subarry and placing the smaller of the two 
-
-
         if (L[i] <= R[j]) {
             A[k] = L[i];
             i++;
@@ -87,45 +82,83 @@ void merge(std::vector<int>& A, int left, int right, int mid) {
         k++;
     }
     while (i < n1) {
-        arr[k] = L[i];
+        A[k] = L[i];
         i++;
         k++;
     }
 
     while (j < n2) {
-        arr[k] = R[j];
+        A[k] = R[j];
         j++;
         k++;
     }
-}
+};
 
-void quickSort(std::vector<int>& A, int low, int high) 
+void mergeSort(std::vector<std::string>& A, int left, int right, int& comparisons) 
 {
-    if (low < high) {
-        //  Partition array around a chosen pivot into low and high subarray halves,
-        //  returning the partition to the middle of each
-        part = partition(A, low, high)
+    if (left < right) {
+        int mid = left + (right - left) / 2;
 
-        // Recursively sort each smaller subarray of either half by further partitioning
-        // and calls to quickSort
-        quickSort(A, low, part-1);
-        quickSort(A, part+1, high);
-
+        // Recursively divide an array into sorted sub arrays of size 1, and then merge back the sorted subarrys
+        mergeSort(A, left, mid, comparisons);
+        mergeSort(A, mid + 1, right, comparisons);
+        merge(A, left, mid, right, comparisons);
     }
-}
-int partition(std::vector<int>& A, int low, int high) 
+};
+
+void countMergeSort(std::vector<std::string>& A) {
+    int comparisons = 0;
+    mergeSort(A, 0, A.size() - 1, comparisons);
+    std::cout << "Merge Sort Comparisons: " << comparisons << std::endl;
+};
+
+int partition(std::vector<std::string>& A, int low, int high, int& comparisons) 
 {
     // Using high as pivot, sort array between elements below than the pivot and those above
-    int pivot = A[high];
+    std::string pivot = A[high];
     int i = low - 1;
-    for (j = low, j < high, j++) {
+    for (int j = low; j < high; j++) {
+        comparisons++;
         if (A[j] <= pivot) {
             i++;
-            std::swap(A[i], A[j])
+            std::swap(A[i], A[j]);
         }
     }
 
     // Return pivot to middle position between each half
-    std::swap(A[i+1], A[high])
+    std::swap(A[i+1], A[high]);
     return (i+1);
+};
+
+void quickSort(std::vector<std::string>& A, int low, int high, int& comparisons) 
+{
+    if (low < high) {
+        //  Partition array around a chosen pivot into low and high subarray halves,
+        //  returning the partition to the middle of each
+        int part = partition(A, low, high, comparisons);
+
+        // Recursively sort each smaller subarray of either half by further partitioning
+        // and calls to quickSort
+        quickSort(A, low, part-1, comparisons);
+        quickSort(A, part+1, high, comparisons);
+
+    }
 }
+
+void countQuickSort(std::vector<std::string>& A) {
+    int comparisons = 0;
+    quickSort(A, 0, A.size() - 1, comparisons);
+    std::cout << "Quick Sort Comparisons: " << comparisons << std::endl;
+};
+
+void shuffle(std::vector<std::string>& A) 
+{
+    int n = A.size();
+    std::srand(time(NULL));
+
+    for (int i = n - 1; i > 0; i--) {
+        int j = rand() % (i+1);
+        std::swap(A[i], A[j]);
+    }
+    std::cout << "Shuffled Array" << std::endl;
+};

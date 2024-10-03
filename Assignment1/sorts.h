@@ -3,14 +3,22 @@
 
 #include <vector>
 
-void selectionSort(std::vector<int>& A);
+void selectionSort(std::vector<std::string>& A);
 
-void insertionSort(std::vector<int>& A);
+void insertionSort(std::vector<std::string>& A);
 
-void mergeSort(std::vector<int>& A, int left, int right);
+void merge(std::vector<std::string>& A, int left, int right, int mid, int& comparisons);
 
-void merge(std::vector<int>& A, int left, int right, int mid);
+void mergeSort(std::vector<std::string>& A, int left, int right, int& comparisons);
 
-int quickSort(std::vector<int>& A, int low, int high);
+void countMergeSort(std::vector<std::string>& A);
+
+int partition(std::vector<std::string>& A, int low, int high, int& comparisons);
+
+void quickSort(std::vector<std::string>& A, int low, int high, int& comparisons);
+
+void countQuickSort(std::vector<std::string>& A);
+
+void shuffle(std::vector<std::string>& A);
 
 #endif

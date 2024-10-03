@@ -38,4 +38,5 @@ void palindromes(std::vector<std::string>& items) {
         if (palindrome) {std::cout << items[i] << std::endl;};
         i++;
     }
+    std::cout << std::endl;
 }

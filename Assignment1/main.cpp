@@ -31,23 +31,23 @@ int main() {
     //palindromes(list);
 
     // Randomize array using Knuth shuffle, then sort via ...
-    shuffle(list);
-    selectionSort(list);
+    //shuffle(list);
+    //selectionSort(list);
     
-    shuffle(list);
+    //shuffle(list);
     insertionSort(list);
 
-    shuffle(list);
-    countMergeSort(list);
+    //shuffle(list);
+    //countMergeSort(list);
 
-    shuffle(list);
-    countQuickSort(list);
+    //shuffle(list);
+    //countQuickSort(list);
 
     // Prints Sorted Array for validation
-    
+    /*
     for (auto i : list) {
         cout << i << std::endl;
     }
-    
+    */
     return 0;
 }

@@ -7,6 +7,18 @@ std::string makeLower(std::string s) {
     return s;
 };
 
+void shuffle(std::vector<std::string>& A) 
+{
+    int n = A.size();
+    std::srand(time(NULL));
+
+    for (int i = n - 1; i > 0; i--) {
+        int j = rand() % (i+1);
+        std::swap(A[i], A[j]);
+    }
+    std::cout << "Shuffled Array" << std::endl;
+};
+
 void selectionSort(std:: vector<std::string>& A) 
 {
     int comparisons = 0;
@@ -51,6 +63,7 @@ void insertionSort(std::vector<std::string>& A)
         }
         A[j + 1] = key;
     }
+    
     std::cout << "Insertion Sort Comparisons: " << comparisons << "\n" <<std::endl;
 };
 
@@ -116,8 +129,9 @@ void mergeSort(std::vector<std::string>& A, int left, int right, int& comparison
 
 void countMergeSort(std::vector<std::string>& A) {
     int comparisons = 0;
+    int j = 50;
     mergeSort(A, 0, A.size() - 1, comparisons);
-    std::cout << "Merge Sort Comparisons: " << comparisons << "\n" << std::endl;
+    std::cout << "Merge Sort Comparisons : " << comparisons << "\n" << std::endl;
 };
 
 int partition(std::vector<std::string>& A, int low, int high, int& comparisons) 
@@ -149,25 +163,13 @@ void quickSort(std::vector<std::string>& A, int low, int high, int& comparisons)
         // and calls to quickSort
         quickSort(A, low, part-1, comparisons);
         quickSort(A, part+1, high, comparisons);
-
     }
 }
 
 void countQuickSort(std::vector<std::string>& A) {
     int comparisons = 0;
     quickSort(A, 0, A.size() - 1, comparisons);
-    std::cout << "Quick Sort Comparisons: " << comparisons << "\n" << std::endl;
+    std::cout << "Quick Sort Comparisons : " << comparisons << "\n" << std::endl;
 };
 
-void shuffle(std::vector<std::string>& A) 
-{
-    int n = A.size();
-    std::srand(time(NULL));
-
-    for (int i = n - 1; i > 0; i--) {
-        int j = rand() % (i+1);
-        std::swap(A[i], A[j]);
-    }
-    std::cout << "Shuffled Array" << std::endl;
-};
 

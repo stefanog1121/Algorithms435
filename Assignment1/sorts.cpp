@@ -164,7 +164,7 @@ void quickSort(std::vector<std::string>& A, int low, int high, int& comparisons)
         quickSort(A, low, part-1, comparisons);
         quickSort(A, part+1, high, comparisons);
     }
-}
+};
 
 void countQuickSort(std::vector<std::string>& A) {
     int comparisons = 0;

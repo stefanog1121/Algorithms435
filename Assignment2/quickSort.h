@@ -3,9 +3,9 @@
 
 #include <vector>
 
-int partition(std::vector<std::string>& A, int low, int high, int& comparisons);
+int partition(std::vector<std::string>& A, int low, int high);
 
-void quickSort(std::vector<std::string>& A, int low, int high, int& comparisons);
+void quickSort(std::vector<std::string>& A, int low, int high);
 
 std::string makeLower(std::string s);
 

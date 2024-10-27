@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <vector>
 #include <fstream>
 #include <string>
@@ -43,22 +44,27 @@ int main() {
         items.push_back(list[r]);
     }
 
+    // set floating point precision for printing
+    std::cout << std::fixed << std::showpoint;
+    std::cout << std::setprecision(2);
+
     // linear search comparisons
-    int linearComparisonsCount = 0;
+    double linearComparisonsCount = 0;
     for (std::string i : items) {
         linearComparisonsCount += linearSearch(list, i);
     }
-    double avgl = linearComparisonsCount / 42;
+    double avgl = linearComparisonsCount / 42.0;
     std::cout << "Average Linear Search Comparisons: " << avgl << '\n';
     std::cout << '\n';
 
     // binary search comparisons
-    int binaryComparisonsCount = 0;
+    double binaryComparisonsCount = 0;
     for (std::string i : items) {
         binaryComparisonsCount += binarySearch(list, 0, list.size(), i, 0);
     }
-    double avgb = binaryComparisonsCount / 42;
+    double avgb = binaryComparisonsCount / 42.0;
     std::cout << "Average Binary Search Comparisons: " << avgb << '\n';
+    std::cout << '\n';
 
     // hashing comparisons
 

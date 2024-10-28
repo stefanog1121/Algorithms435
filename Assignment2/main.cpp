@@ -28,7 +28,7 @@ std::vector<std::string> readFile(const std::string& filename) {
 int getRandomNumber(std::vector<std::string>& a) {
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dis(1, a.size());
+    std::uniform_int_distribution<> dis(0, a.size() - 1);
     return dis(gen);
 }
 
@@ -47,24 +47,10 @@ int main() {
     // set floating point precision for printing
     std::cout << std::fixed << std::showpoint;
     std::cout << std::setprecision(2);
-
-    // linear search comparisons
-    double linearComparisonsCount = 0;
-    for (std::string i : items) {
-        linearComparisonsCount += linearSearch(list, i);
-    }
-    double avgl = linearComparisonsCount / 42.0;
-    std::cout << "Average Linear Search Comparisons: " << avgl << '\n';
-    std::cout << '\n';
-
-    // binary search comparisons
-    double binaryComparisonsCount = 0;
-    for (std::string i : items) {
-        binaryComparisonsCount += binarySearch(list, 0, list.size(), i, 0);
-    }
-    double avgb = binaryComparisonsCount / 42.0;
-    std::cout << "Average Binary Search Comparisons: " << avgb << '\n';
-    std::cout << '\n';
+    
+    // search avg comparisons
+    linearGetItems(list, items);
+    binaryGetItems(list, items);
 
     // hashing comparisons
 

@@ -37,7 +37,6 @@ int binarySearch(std::vector<std::string>& a, int low, int high, std::string key
             return comparisons;
         }
 
-        comparisons = comparisons + 1;
         if (makeLower(key) > makeLower(a[mid])) {
             return binarySearch(a, mid + 1, high, key, comparisons);
         }

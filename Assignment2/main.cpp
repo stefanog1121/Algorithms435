@@ -6,6 +6,7 @@
 #include <random>
 #include "quickSort.h"
 #include "search.h"
+#include "hashTable.h"
 
 std::vector<std::string> readFile(const std::string& filename) {
     std::ifstream file(filename);
@@ -49,10 +50,11 @@ int main() {
     std::cout << std::setprecision(2);
     
     // search avg comparisons
-    linearGetItems(list, items);
-    binaryGetItems(list, items);
+    // linearGetItems(list, items);
+    // binaryGetItems(list, items);
 
     // hashing comparisons
-
+    HashTable table;
+    table.hashGetItems(list, items);
 }
 

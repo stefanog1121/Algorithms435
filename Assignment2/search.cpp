@@ -49,20 +49,28 @@ int binarySearch(std::vector<std::string>& a, int low, int high, std::string key
 
 void linearGetItems(std::vector<std::string>& list, std::vector<std::string>& items) {
     double linearComparisonsCount = 0;
-        for (std::string i : items) {
-            linearComparisonsCount += linearSearch(list, i);
-        }
-        double avgl = linearComparisonsCount / 42.0;
-        std::cout << "Average Linear Search Comparisons: " << avgl << '\n';
-        std::cout << '\n';
+
+    std::cout << "\nLinear Search Results:\n";
+    std::cout << "-------------------------\n";
+
+    for (std::string i : items) {
+        linearComparisonsCount += linearSearch(list, i);
+    }
+    double avgl = linearComparisonsCount / (double)items.size();
+    std::cout << "Average Linear Search Comparisons: " << avgl << '\n';
+    std::cout << '\n';
 };
 
 void binaryGetItems(std::vector<std::string>& list, std::vector<std::string>& items) {
     double binaryComparisonsCount = 0;
+
+    std::cout << "\nBinary Search Results:\n";
+    std::cout << "-------------------------\n";
+
     for (std::string i : items) {
         binaryComparisonsCount += binarySearch(list, 0, list.size() - 1, i, 0);
     }
-    double avgb = binaryComparisonsCount / 42.0;
+    double avgb = binaryComparisonsCount / (double)items.size();
     std::cout << "Average Binary Search Comparisons: " << avgb << '\n';
     std::cout << '\n';
 };

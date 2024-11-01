@@ -5,6 +5,12 @@
 // node constructor 
 HashTable::Node::Node(const std::string& s) : item(s), next(nullptr) {}
 
+// table constructor 
+HashTable::HashTable() {
+    // initialize all chain heads to NULL
+    std::fill(table, table + SIZE, nullptr);
+}
+
 // hash function 
 int HashTable::hashCode(const std::string& s) {
     std::string upperStr = s;
@@ -16,23 +22,9 @@ int HashTable::hashCode(const std::string& s) {
         char thisLetter = upperStr.at(i);
         int thisValue = (int)thisLetter;
         letterTotal = letterTotal + thisValue;
-
-        // Test: print the char and the hash.
-        /* 
-        System.out.print(" ["); 
-        System.out.print(thisLetter); 
-        System.out.print(thisValue); 
-        System.out.print("] "); 
-        */
     }
     int code = (letterTotal * 1) % SIZE;
     return code;
-}
-
-// constructor 
-HashTable::HashTable() {
-    // initialize all chain heads to NULL
-    std::fill(table, table + SIZE, nullptr);
 }
 
 void HashTable::insertItem(const std::string& item) {
@@ -107,7 +99,7 @@ void HashTable::hashGetItems(const std::vector<std::string>& list,
     std::cout << "Table Size: " << SIZE << "\n\n";
     std::cout << "\nHash Table Search Results:\n";
     std::cout << "-------------------------\n";
-    
+
     for (const auto& i : items) {
         std::pair<bool, int> retrival = getItem(i);
         if (retrival.first) {

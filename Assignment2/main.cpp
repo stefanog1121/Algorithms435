@@ -50,8 +50,8 @@ int main() {
     std::cout << std::setprecision(2);
     
     // search avg comparisons
-    linearGetItems(list, items);
-    binaryGetItems(list, items);
+    // linearGetItems(list, items);
+    // binaryGetItems(list, items);
 
     // hashing comparisons
     HashTable table;

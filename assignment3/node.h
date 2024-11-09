@@ -4,7 +4,8 @@
 class Node {
 public:
     int data;
-    Node* next;
+    Node* left;
+    Node* right;
 
     Node(int value);
 };

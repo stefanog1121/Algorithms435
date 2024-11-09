@@ -2,5 +2,6 @@
 
 Node::Node(int value) {
     this->data = value;
-    this->next = nullptr;
+    this->left = nullptr;
+    this->right = nullptr;
 }

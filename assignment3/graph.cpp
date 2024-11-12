@@ -7,4 +7,9 @@
 // default
 Graph::Graph() {};
 
-// with num of vertices 
+void addVertex() {};
+void Graph::addEdge() {};
+void Graph::printMatrix() {};
+void Graph::printAdjList() {};
+void Graph::printDFS() {};
+void Graph::printBFS() {};

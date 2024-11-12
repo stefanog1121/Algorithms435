@@ -19,12 +19,13 @@ class Graph {
         };
         std::map<int, Vertex> vertex_map;
     public:
-        void addVertex() {};
-        void addEdge() {};
-        void printMatrix() {};
-        void printAdjList() {};
-        void printDFS() {};
-        void printBFS() {};
+        Graph();
+        void addVertex();
+        void addEdge();
+        void printMatrix();
+        void printAdjList();
+        void printDFS();
+        void printBFS();
 };
 
 #endif 

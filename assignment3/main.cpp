@@ -18,23 +18,23 @@ std::vector<std::string> readFile(const std::string& filename) {
         file.close();
     } else {
         std::cerr << "Unable to open file: " << filename << '\n';
-        std::cerr << "Error: " << strerror(errno) << '\n';  // Add this for more detail
+        std::cerr << "Error: " << strerror(errno) << '\n'; 
     }
     return list;
 }
 
 int main() {
+    // Binary Search Tree implementation:
+    /*
     std::vector<std::string> list = readFile("magicitems.txt");
     std::vector<std::string> targetList = readFile("magicitems-find-in-bst.txt");
 
     BST Tree;
     Tree.populateTree(list);
 
-    
     std::cout<<"\n" << "-------------------" << "\n" << "\n";
     Tree.inOrderTraversal(Tree.getRoot());
 
-    
     std::cout<<"\n" << "-------------------" << "\n" << "\n";
     int comparisons = 0;
     for (const auto& i : targetList) {
@@ -44,4 +44,21 @@ int main() {
     }
     comparisons  = comparisons / targetList.size();
     std::cout << "Average Comparisons for list of size " << targetList.size() << " :" << comparisons << "\n";
+
+    */
+    // Graphs implementation:
+    std::vector<std::string> graphCommandList = readFile("graphs1.txt"); 
+    // ^^ change string in the line above to use different command files
+
+    std::vector<Graph> graphs = Graph::parseGraphList(graphCommandList);
+    for (auto& graph : graphs) {
+        std::cout << graph.getTitle() << ":\n";
+        graph.printMatrix();
+        std::cout<< "-------------------" << "\n";
+        graph.printAdjList();
+        std::cout << "\n";
+    }
+    
+
+
 }

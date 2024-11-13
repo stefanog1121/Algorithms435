@@ -7,12 +7,15 @@
 
 class Graph {
     private:
+        std::string title;
         std::vector<int> vertices;
         std::vector<std::vector<int>> matrix;
         std::map<int, std::vector<int>> adjacent;
 
         // linked-list object structure
         struct Vertex {
+            Vertex();
+            Vertex(int num);
             int id;
             bool processed;
             std::vector<int> neighbors;
@@ -20,12 +23,15 @@ class Graph {
         std::map<int, Vertex> vertex_map;
     public:
         Graph();
-        void addVertex();
-        void addEdge();
+        void setTitle(std::string title);
+        std::string getTitle();
+        void addVertex(int id);
+        void addEdge(int x, int y);
         void printMatrix();
         void printAdjList();
         void printDFS();
         void printBFS();
+        static std::vector<Graph> parseGraphList(std::vector<std::string>& list);
 };
 
 #endif 

@@ -25,12 +25,13 @@ class Graph {
         Graph();
         void setTitle(std::string title);
         std::string getTitle();
+        Graph::Vertex& getFirstVertex();
         void addVertex(int id);
         void addEdge(int x, int y);
         void printMatrix();
         void printAdjList();
-        void printDFS();
-        void printBFS();
+        void printDFS(Vertex& v);
+        void printBFS(Vertex& v);
         static std::vector<Graph> parseGraphList(std::vector<std::string>& list);
 };
 

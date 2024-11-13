@@ -15,15 +15,14 @@ void BST::treeInsert(const std::string& s) {
     Node* z = new Node(s);
 
     // traverse tree from root, moving the node of comparison to the left / right child as needed
-    std::cout<<"\n" << "-------------------" << "\n";
     while (x != nullptr) {
         y = x;
         if (makeLower(z->id) < makeLower(x->id)) {
-            std::cout<< "L" << "\n";
+            std::cout<< "L ";
             x = x->left;
             }
         else {
-            std::cout<< "R" << "\n";
+            std::cout<< "R ";
             x = x->right;
             }
     }
@@ -33,7 +32,7 @@ void BST::treeInsert(const std::string& s) {
     if (y == nullptr) { root = z; }
     else if (makeLower(z->id) < makeLower(y->id)) { y->left = z; }
     else { y->right = z; };
-    std::cout<< "Inserted " << s <<"\n";
+    std::cout<< "| Inserted " << s <<"\n";
 
 };
 
@@ -47,17 +46,17 @@ void BST::inOrderTraversal(Node* x) {
 
 int BST::search(Node* x, const std::string& s, int comparisons) {
     if (x == nullptr || x->id == s){
-        std::cout<< "Found " << s << " | ";
+        std::cout<< "Found " << s << " | Comparisons: " << comparisons << "\n";
         comparisons++;
         return comparisons;
     }
     if (makeLower(s) < makeLower(x->id)) {
-        std::cout<< "L" << "\n";
+        std::cout<< "L ";
         comparisons++;
         return search(x->left, s, comparisons);
     }
     else {
-        std::cout<< "R" << "\n";
+        std::cout<< "R ";
         comparisons++;
         return search(x->right, s, comparisons);
     }

@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <queue>
 #include <sstream>
 
 // graph / vertex constructors:
@@ -20,6 +21,11 @@ void Graph::setTitle(std::string title) {
 std::string Graph::getTitle() {
     return this->title;
 }
+
+Graph::Vertex& Graph::getFirstVertex() {
+    return vertex_map[vertices[0]];
+}
+
 
 void Graph::addVertex(int id) {
      vertices.push_back(id);
@@ -59,7 +65,7 @@ void Graph::addEdge(int x, int y) {
 };
 
 void Graph::printMatrix() {
-    std::cout << "Matrix Representation:\n";
+    std::cout<< "\n----------Matrix Representation---------" << "\n";
     // Print column headers
     std::cout << "  ";
     for (int vertex : vertices) {
@@ -78,7 +84,7 @@ void Graph::printMatrix() {
 };
 
 void Graph::printAdjList() {
-    std::cout << "Adjacency List Representation:\n";
+    std::cout<< "\n----------Ajacency List Representation---------" << "\n";
     for (std::pair<const int, std::vector<int>> pair : adjacent) {
         std::cout << "[" << pair.first << "] ";
         for (int neighbor : pair.second) {
@@ -88,8 +94,37 @@ void Graph::printAdjList() {
     }
 };
 
-void Graph::printDFS() {};
-void Graph::printBFS() {};
+void Graph::printDFS(Vertex& v) {
+    if (!v.processed) {
+        std::cout << v.id << " ";
+        v.processed = true;
+    }
+    for (int neighborId : v.neighbors) {
+        if (!vertex_map[neighborId].processed) {
+            printDFS(vertex_map[neighborId]);
+        }
+    }
+
+    
+};
+
+void Graph::printBFS(Vertex& v) {
+    std::queue<Vertex> q;
+    q.push(v);
+    v.processed = true;
+    while (!q.empty()) {
+        Vertex curr = q.front();
+        q.pop();
+        std::cout << curr.id << " ";
+        for (int i : curr.neighbors) {
+            Vertex temp = vertex_map[i];
+            if (!temp.processed) {
+                q.push(temp);
+                temp.processed = true;
+            }
+        }
+    }
+};
 
 std::vector<Graph> Graph::parseGraphList(std::vector<std::string>& list) {
     std::vector<Graph> graphs;
@@ -99,7 +134,7 @@ std::vector<Graph> Graph::parseGraphList(std::vector<std::string>& list) {
     for (const auto& line : list) {
         // grab title from comment lines
         if (line.substr(0, 2) == "--") {
-            currentTitle = line.substr(2);  // store without "--"
+            currentTitle = line;
             continue;
         }
         if (line.empty()) continue;

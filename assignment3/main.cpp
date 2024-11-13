@@ -24,40 +24,50 @@ std::vector<std::string> readFile(const std::string& filename) {
 }
 
 int main() {
+    // set floating point precision for printing
+    std::cout << std::fixed << std::showpoint;
+    std::cout << std::setprecision(2);
+
+
     // Binary Search Tree implementation:
-    /*
     std::vector<std::string> list = readFile("magicitems.txt");
     std::vector<std::string> targetList = readFile("magicitems-find-in-bst.txt");
 
+    std::cout<<"\n" << "---------- Populating BST ---------" << "\n" << "\n";
     BST Tree;
     Tree.populateTree(list);
 
-    std::cout<<"\n" << "-------------------" << "\n" << "\n";
+    std::cout<<"\n" << "---------- BST Traversal ---------" << "\n" << "\n";
     Tree.inOrderTraversal(Tree.getRoot());
 
-    std::cout<<"\n" << "-------------------" << "\n" << "\n";
-    int comparisons = 0;
+    std::cout<<"\n" << "---------- Searching Comparison ---------" << "\n" << "\n";
+    double comparisons = 0;
     for (const auto& i : targetList) {
         int count = Tree.search(Tree.getRoot(), i, 0);
-        std::cout << "Comparisons: " << count << "\n";
         comparisons = comparisons + count;
     }
     comparisons  = comparisons / targetList.size();
-    std::cout << "Average Comparisons for list of size " << targetList.size() << " :" << comparisons << "\n";
+    std::cout << "-------------------" << "\n";
+    std::cout << "Average Comparisons for list of size " << targetList.size() << ": " << comparisons << "\n";
 
-    */
-    // Graphs implementation:
+    
+    // Graph implementation:
     std::vector<std::string> graphCommandList = readFile("graphs1.txt"); 
     // ^^ change string in the line above to use different command files
 
     std::vector<Graph> graphs = Graph::parseGraphList(graphCommandList);
     for (auto& graph : graphs) {
-        std::cout << graph.getTitle() << ":\n";
+        std::cout << "\n"<< graph.getTitle() << ":\n";
         graph.printMatrix();
-        std::cout<< "-------------------" << "\n";
         graph.printAdjList();
-        std::cout << "\n";
+
+        std::cout<< "\n----------Depth First Traversal---------" << "\n";
+        graph.printDFS(graph.getFirstVertex());
+        std::cout<< "\n\n----------Breadth First Traversal---------" << "\n";
+        graph.printBFS(graph.getFirstVertex());
     }
+    
+    
     
 
 

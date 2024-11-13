@@ -92,6 +92,7 @@
         "random": "cpp",
         "__tree": "cpp",
         "map": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "queue": "cpp"
     }
 }

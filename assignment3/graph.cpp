@@ -104,31 +104,58 @@ void Graph::printDFS(Vertex& v) {
             printDFS(vertex_map[neighborId]);
         }
     }
-
-    
 };
 
 void Graph::printBFS(Vertex& v) {
-    std::queue<Vertex> q;
-    q.push(v);
+    // reset all processed flags
+    for (auto& pair : vertex_map) {
+        pair.second.processed = false;
+    }
+
+    std::queue<Vertex*> q;
+    q.push(&v);
     v.processed = true;
+
     while (!q.empty()) {
-        Vertex curr = q.front();
+        Vertex* curr = q.front();
         q.pop();
-        std::cout << curr.id << " ";
-        for (int i : curr.neighbors) {
-            Vertex temp = vertex_map[i];
-            if (!temp.processed) {
-                q.push(temp);
-                temp.processed = true;
+        std::cout << curr->id << " ";
+        for (int i : curr->neighbors) {
+            Vertex& neighbor = vertex_map[i];
+            if (!neighbor.processed) {
+                q.push(&neighbor);
+                neighbor.processed = true;
             }
         }
     }
+
+    // check vertex_map for any disconnected components
+    for (auto& pair : vertex_map) {
+        if (!pair.second.processed) {
+            Vertex& unvisited = pair.second;
+            q.push(&unvisited);
+            unvisited.processed = true;
+            
+            while (!q.empty()) {
+                Vertex* curr = q.front();
+                q.pop();
+                std::cout << curr->id << " ";
+                for (int i : curr->neighbors) {
+                    Vertex& neighbor = vertex_map[i];
+                    if (!neighbor.processed) {
+                        q.push(&neighbor);
+                        neighbor.processed = true;
+                    }
+                }
+            }
+        }
+    }
+    std::cout << "\n";
 };
 
-std::vector<Graph> Graph::parseGraphList(std::vector<std::string>& list) {
-    std::vector<Graph> graphs;
-    Graph curr;
+std::vector<Graph*> Graph::parseGraphList(std::vector<std::string>& list) {
+    std::vector<Graph*> graphs;
+    Graph* curr = nullptr;
     std::string currentTitle;
 
     for (const auto& line : list) {
@@ -145,11 +172,11 @@ std::vector<Graph> Graph::parseGraphList(std::vector<std::string>& list) {
         ss >> command;
         
         if (command == "new") {
-            if (!curr.vertices.empty()) {
+            if (curr != nullptr) {
                 graphs.push_back(curr);
             }
-            curr = Graph();
-            curr.setTitle(currentTitle);
+            curr = new Graph();
+            curr->setTitle(currentTitle);
         }
         else if (command == "add") {
             ss >> temp;  // skips "vertex" or "edge"
@@ -157,20 +184,20 @@ std::vector<Graph> Graph::parseGraphList(std::vector<std::string>& list) {
             if (temp == "vertex") {
                 int vertexId;
                 ss >> vertexId;
-                curr.addVertex(vertexId);
+                curr->addVertex(vertexId);
             }
             else if (temp == "edge") {
                 int from, to;
                 ss >> from;
                 ss >> temp;  // skip the "-" character
                 ss >> to;
-                curr.addEdge(from, to);
+                curr->addEdge(from, to);
             }
         }
     }
 
-    if (!curr.vertices.empty()) {
+    if (curr != nullptr) {
         graphs.push_back(curr);
     }
     return graphs;
-};
+}

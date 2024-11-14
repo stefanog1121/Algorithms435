@@ -28,7 +28,7 @@ int main() {
     std::cout << std::fixed << std::showpoint;
     std::cout << std::setprecision(2);
 
-
+    
     // Binary Search Tree implementation:
     std::vector<std::string> list = readFile("magicitems.txt");
     std::vector<std::string> targetList = readFile("magicitems-find-in-bst.txt");
@@ -49,22 +49,21 @@ int main() {
     comparisons  = comparisons / targetList.size();
     std::cout << "-------------------" << "\n";
     std::cout << "Average Comparisons for list of size " << targetList.size() << ": " << comparisons << "\n";
-
     
     // Graph implementation:
     std::vector<std::string> graphCommandList = readFile("graphs1.txt"); 
     // ^^ change string in the line above to use different command files
 
-    std::vector<Graph> graphs = Graph::parseGraphList(graphCommandList);
+    std::vector<Graph*> graphs = Graph::parseGraphList(graphCommandList);
     for (auto& graph : graphs) {
-        std::cout << "\n"<< graph.getTitle() << ":\n";
-        graph.printMatrix();
-        graph.printAdjList();
+        std::cout << "\n"<< graph->getTitle() << ":\n";
+        graph->printMatrix();
+        graph->printAdjList();
 
         std::cout<< "\n----------Depth First Traversal---------" << "\n";
-        graph.printDFS(graph.getFirstVertex());
+        graph->printDFS(graph->getFirstVertex());
         std::cout<< "\n\n----------Breadth First Traversal---------" << "\n";
-        graph.printBFS(graph.getFirstVertex());
+        graph->printBFS(graph->getFirstVertex());
     }
     
     

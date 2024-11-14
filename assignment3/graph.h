@@ -32,7 +32,7 @@ class Graph {
         void printAdjList();
         void printDFS(Vertex& v);
         void printBFS(Vertex& v);
-        static std::vector<Graph> parseGraphList(std::vector<std::string>& list);
+        static std::vector<Graph*> parseGraphList(std::vector<std::string>& list);
 };
 
 #endif 

@@ -99,19 +99,30 @@ void Graph::printDFS(Vertex& v) {
         std::cout << v.id << " ";
         v.processed = true;
     }
+    
     for (int neighborId : v.neighbors) {
         if (!vertex_map[neighborId].processed) {
             printDFS(vertex_map[neighborId]);
         }
     }
-};
+    
+    // check vertex_map for any disconnected components
+    for (auto& pair : vertex_map) {
+        if (!pair.second.processed) {
+            Vertex& unvisited = pair.second;
+            std::cout << unvisited.id << " ";
+            unvisited.processed = true;
+            
+            for (int neighborId : unvisited.neighbors) {
+                if (!vertex_map[neighborId].processed) {
+                    printDFS(vertex_map[neighborId]);
+                }
+            }
+        }
+    }
+}
 
 void Graph::printBFS(Vertex& v) {
-    // reset all processed flags
-    for (auto& pair : vertex_map) {
-        pair.second.processed = false;
-    }
-
     std::queue<Vertex*> q;
     q.push(&v);
     v.processed = true;
@@ -150,7 +161,6 @@ void Graph::printBFS(Vertex& v) {
             }
         }
     }
-    std::cout << "\n";
 };
 
 std::vector<Graph*> Graph::parseGraphList(std::vector<std::string>& list) {
@@ -200,4 +210,10 @@ std::vector<Graph*> Graph::parseGraphList(std::vector<std::string>& list) {
         graphs.push_back(curr);
     }
     return graphs;
+}
+
+void Graph::resetFlags() {
+    for (auto& pair : vertex_map) {
+        pair.second.processed = false;
+    }
 }

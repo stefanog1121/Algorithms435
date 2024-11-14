@@ -33,6 +33,7 @@ class Graph {
         void printDFS(Vertex& v);
         void printBFS(Vertex& v);
         static std::vector<Graph*> parseGraphList(std::vector<std::string>& list);
+        void resetFlags();
 };
 
 #endif 

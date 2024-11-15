@@ -84,7 +84,7 @@ void Graph::printMatrix() {
 };
 
 void Graph::printAdjList() {
-    std::cout<< "\n----------Ajacency List Representation---------" << "\n";
+    std::cout<< "\n----------Adjacency List Representation---------" << "\n";
     for (std::pair<const int, std::vector<int>> pair : adjacent) {
         std::cout << "[" << pair.first << "] ";
         for (int neighbor : pair.second) {

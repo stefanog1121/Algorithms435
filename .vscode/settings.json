@@ -93,6 +93,9 @@
         "__tree": "cpp",
         "map": "cpp",
         "utility": "cpp",
-        "queue": "cpp"
+        "queue": "cpp",
+        "__verbose_abort": "cpp",
+        "execution": "cpp",
+        "print": "cpp"
     }
 }

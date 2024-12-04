@@ -4,15 +4,18 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <limits>
 
 class Graph {
 private:
     struct Vertex {
         int id;
-        std::vector<std::pair<int, int>> neighbors;  // pairs = (destination_vertex, weight)
+        std::vector<std::pair<int, int>> neighbors;  // (destination_vertex, weight)
+        int distance;                                
+        int predecessor;                             
         
-        Vertex();
-        Vertex(int num);
+        Vertex() : id(0), distance(INT_MAX), predecessor(-1) {}
+        Vertex(int num) : id(num), distance(INT_MAX), predecessor(-1) {}
     };
 
     std::string title;
@@ -26,8 +29,10 @@ public:
     
     void addVertex(int id);
     void addEdge(int from, int to, int weight);
-    
-    const std::map<int, Vertex>& getVertices();
+    void SSSP(int source);
+    void relax(int u, int v, int w);
+
+    static std::vector<Graph*> parseGraphList(std::vector<std::string>& list);
 };
 
 #endif

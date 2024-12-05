@@ -104,8 +104,8 @@ void Graph::SSSP(int source) {
     for (const auto& vertex : vertices) {
         int v = vertex.first;
         if (v != source) {  
-            std::cout << source << " --> " << v << " cost is " 
-                     << vertices[v].distance << "; path: ";
+            std::cout << source << " --> " << v << " Cost: " 
+                     << vertices[v].distance << " | Path: ";
             
             std::vector<int> path;
             int current = v;

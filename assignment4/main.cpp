@@ -1,4 +1,5 @@
 #include "weightedGraph.h"
+#include "fractionalNapsack.h"
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -48,8 +49,32 @@ void testGraphs(const std::string& filename) {
     }
 }
 
+void runHeists(const std::string& filename) {
+    std::vector<std::string> lines = readFile(filename);
+    if (lines.empty()) {
+        std::cerr << "Error: File not found" << std::endl;
+        return;
+    }
+    
+    std::vector<SpiceHeist*> heists = SpiceHeist::parseSpiceHeist(lines);
+    
+    std::cout<<"\n";
+    for (auto* heist : heists) {
+        heist->optimizeKnapsacks();
+        heist->printResults();  
+    }
+    std::cout<<"\n";
+    
+    // clean up
+    for (auto* heist : heists) {
+        delete heist;
+    }
+}
+
 int main() {
-    testGraphs("graphs2.txt");  //  *** Change this line for other graph files ***
+    //testGraphs("graphs2.txt");  
+    runHeists("spice.txt");
+    //  *** Change these linesfor other graph or heist files ***
     
     return 0;
 }

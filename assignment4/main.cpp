@@ -57,7 +57,7 @@ void runHeists(const std::string& filename) {
     }
     
     std::vector<SpiceHeist*> heists = SpiceHeist::parseSpiceHeist(lines);
-    
+
     std::cout<<"\n";
     for (auto* heist : heists) {
         heist->optimizeKnapsacks();
@@ -72,7 +72,7 @@ void runHeists(const std::string& filename) {
 }
 
 int main() {
-    //testGraphs("graphs2.txt");  
+    testGraphs("graphs2.txt");  
     runHeists("spice.txt");
     //  *** Change these linesfor other graph or heist files ***
     
